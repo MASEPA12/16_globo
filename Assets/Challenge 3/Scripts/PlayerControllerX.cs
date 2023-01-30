@@ -20,6 +20,7 @@ public class PlayerControllerX : MonoBehaviour
 
     void Start()
     {
+        playerRb = GetComponent<Rigidbody>();
         Physics.gravity *= gravityModifier;
         playerAudio = GetComponent<AudioSource>();
 
@@ -28,13 +29,17 @@ public class PlayerControllerX : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         // While space is pressed and player is low enough, float up
-        if (Input.GetKey(KeyCode.Space) && !gameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
         {
-            playerRb.AddForce(Vector3.up * floatForce);
+            playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
+        }
+        //if the y pos is lower than 0 or greater than 16, rigidbody velocity is 0
+        if(transform.position.y > 16)
+        {
+            playerRb.velocity = new Vector3 (0,0,0);
         }
     }
 
