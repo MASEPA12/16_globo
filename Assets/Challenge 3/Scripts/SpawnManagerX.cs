@@ -7,7 +7,6 @@ public class SpawnManagerX : MonoBehaviour
     public GameObject[] objectPrefabs;
     private float spawnDelay = 2;
     private float spawnInterval = 1.5f;
-
     private PlayerControllerX playerControllerScript;
 
     void Start()

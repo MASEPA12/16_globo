@@ -6,6 +6,8 @@ public class PlayerControllerX : MonoBehaviour
 {
     public bool gameOver;
 
+    [SerializeField] private int points;
+
     public float floatForce;
     private float gravityModifier = 1.5f;
     private Rigidbody playerRb;
@@ -23,10 +25,8 @@ public class PlayerControllerX : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         Physics.gravity *= gravityModifier;
         playerAudio = GetComponent<AudioSource>();
-
         // Apply a small upward force at the start of the game
         //playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
-
     }
 
     void Update()
@@ -53,17 +53,23 @@ public class PlayerControllerX : MonoBehaviour
             gameOver = true;
             Debug.Log("Game Over!");
             Destroy(other.gameObject);
-        } 
-
-        // if player collides with money, fireworks
-        else if (other.gameObject.CompareTag("Money"))
+        }else if (other.gameObject.CompareTag("ground"))
         {
-            fireworksParticle.Play();
-            playerAudio.PlayOneShot(moneySound, 1.0f);
-            Destroy(other.gameObject);
-
+            Debug.Log("Game Over!");
+            Time.timeScale = 0;
         }
 
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        // if player collides with money, fireworks
+        if (other.gameObject.CompareTag("Money"))
+        {
+            points++;
+            Debug.Log($"TOTAL SCORE: {points}");
+            fireworksParticle.Play();
+            playerAudio.PlayOneShot(moneySound, 1.0f);
+            Destroy(other.gameObject);
+        }
+    }
 }

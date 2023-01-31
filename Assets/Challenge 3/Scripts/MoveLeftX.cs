@@ -8,6 +8,9 @@ public class MoveLeftX : MonoBehaviour
     private PlayerControllerX playerControllerScript;
     private float leftBound = -10;
 
+    //public ParticleSystem bomb_particles;
+
+
     void Start()
     {
         playerControllerScript = FindObjectOfType<PlayerControllerX>();
@@ -15,6 +18,8 @@ public class MoveLeftX : MonoBehaviour
 
     void Update()
     {
+        //bomb_particles.Play();
+
         // If game is not over, move to the left
         if (!playerControllerScript.gameOver)
         {
