@@ -31,13 +31,13 @@ public class PlayerControllerX : MonoBehaviour
 
     void Update()
     {
-        // While space is pressed and player is low enough, float up
+        // If space is pressed and player is low enough, float up
         if (Input.GetKeyDown(KeyCode.Space) && !gameOver)
         {
             playerRb.AddForce(Vector3.up * floatForce, ForceMode.Impulse);
         }
-        //if the y pos is lower than 0 or greater than 16, rigidbody velocity is 0
-        if(transform.position.y > 16)
+        //if the y pos is lower than 0 or greater than 14, rigidbody velocity is 0
+        if(transform.position.y > 14)
         {
             playerRb.velocity = new Vector3 (0,0,0);
         }
