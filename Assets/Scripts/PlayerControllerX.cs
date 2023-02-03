@@ -53,9 +53,13 @@ public class PlayerControllerX : MonoBehaviour
             gameOver = true;
             Debug.Log("Game Over!");
             Destroy(other.gameObject);
-        }else if (other.gameObject.CompareTag("ground"))
+        }
+        else if (other.gameObject.CompareTag("ground"))
         {
+            explosionParticle.Play();
             Debug.Log("Game Over!");
+            playerAudio.PlayOneShot(explodeSound, 1.0f);
+            gameOver = true;
             Time.timeScale = 0;
         }
 
